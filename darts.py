@@ -1,5 +1,6 @@
 # Chad Wilson
 # Justin Moore
+# Jason Thompson
 # Add your names here
 
 # functions
@@ -19,6 +20,13 @@ def main():
     print(numbers)
     print(doubled_numbers)
     print(tripled_numbers)
+    
+    score = int(input("What is your score? \n"))
+    darts = int(input("How many darts do you have? (Max of 12) \n"))
+    
+    while(darts > 12):
+        darts = int(input("To many darts please no more than 12 "))
+
     return
 
 
