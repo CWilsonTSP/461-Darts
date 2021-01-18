@@ -25,7 +25,7 @@ def main():
     darts = int(input("How many darts do you have? (Max of 12) \n"))
     
     while(darts > 12):
-        darts = int(input("To many darts please no more than 12 "))
+        darts = int(input("To many darts please no more than 12 \n"))
 
     return
 
