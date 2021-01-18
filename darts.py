@@ -8,11 +8,9 @@ def double(lst):
     return [x * 2 for x in lst]
 
 def triple(lst):
-	return [x * 3 for x in lst[:-1]]
+    return [x * 3 for x in lst[:-1]]
 
 def calculate_final_double(darts, score, possible_double_list):  #function to calculate possible final double
-    if(score == 0 ):
-        return
     for i in range(len(doubled_numbers)):
         if(score >= doubled_numbers[i]):
             possible_double_list.append(doubled_numbers[i])
