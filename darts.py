@@ -21,11 +21,21 @@ def main():
     print(doubled_numbers)
     print(tripled_numbers)
     
-    score = int(input("What is your score? \n"))
-    darts = int(input("How many darts do you have? (Max of 12) \n"))
+    score = input("What is your score? \n")
+    darts = input("How many darts do you have? (Max of 12) \n")
+
+    if(len(darts) == 0): # The user just hit enter
+        darts = 12
+    if(len(score) == 0): # The user just hit enter
+        score = 501
     
+    score = int(score)
+    darts = int(darts)
+
     while(darts > 12):
         darts = int(input("To many darts please no more than 12 \n"))
+    
+
 
     return
 
