@@ -33,43 +33,48 @@ all_numbers.sort(reverse=True)
 doubled_numbers.sort(reverse=True)
 all_combinations_list = []
 
-def recursion_hell(score, darts, includes_double, scorelist):
+def recursion_hell(score, darts, includes_double, scorelist, last_num):
     if (darts <= 0) or (score <= 0): #If you're out of score or darts, return.
         return
     if darts == 1: #If it's possible to make the last shot, return.
-        if score in all_numbers:
+        if score in all_numbers and score <= last_num:
             scorelist.append(score)
             all_combinations_list.append(scorelist.copy())
             print(f"Adding {scorelist.copy()} to list.")
             scorelist.pop()
-            return
+        return
             
     if not includes_double:
         for num in doubled_numbers:
             if num > score: pass
-            if num == score:
+            elif num == score:
                 scorelist.append(num)
                 all_combinations_list.append(scorelist.copy())
                 print(f"Adding {scorelist.copy()} to list.")
                 scorelist.pop()
-                return
-            scorelist.append(num)
-            recursion_hell(score - num, darts -1, True, scorelist)
-            scorelist.pop()
+                #return			#This fully stops the recursion early
+            else:
+                scorelist.append(num)
+                recursion_hell(score - num, darts -1, True, scorelist, last_num)
+                scorelist.pop()
         return
         
     for num in all_numbers:
-        if num > score: pass
-        if num == score:
-            scorelist.append(score)
-            all_combinations_list.append(scorelist.copy())
-            print(f"Adding {scorelist.copy()} to list.")
-            scorelist.pop()
-            return
-        
-        scorelist.append(num)
-        recursion_hell(score - num, darts - 1, includes_double, scorelist)
-        scorelist.pop()
+        if num <= last_num: #Checks only the singular combination of descending order
+            #print(f"{num} <= {last_num}")
+            if num > score: pass
+            elif num == score:
+                scorelist.append(score)
+                all_combinations_list.append(scorelist.copy())
+                print(f"Adding {scorelist.copy()} to list.")
+                last_num = 60
+                scorelist.pop()
+                #return
+            else:
+                scorelist.append(num)
+                last_num = num
+                recursion_hell(score - num, darts - 1, includes_double, scorelist, last_num)
+                scorelist.pop()
         
 # main
 def main():
@@ -100,7 +105,8 @@ def main():
     includes_double = False
     darts_used = 0
     numlist = []
-    recursion_hell(score, darts, includes_double, numlist)
+    last_num = 60
+    recursion_hell(score, darts, includes_double, numlist, last_num)
 #Following code-block might be unnecessary with the previous recursion hell function   
 #    while score > 0:
 #        for double in possible_double_list:
