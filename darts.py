@@ -1,6 +1,7 @@
 # Chad Wilson
 # Justin Moore
 # Jason Thompson
+# Alexander Wiecking
 # Add your names here
 
 # functions
@@ -41,19 +42,51 @@ def main():
     darts = int(darts)
 
     while(darts > 12):
-        darts = int(input("To many darts please no more than 12 \n"))
+        darts = int(input("Too many darts please no more than 12 \n"))
     
     possible_double_list = []
     possible_double_list = calculate_final_double(darts, score, possible_double_list)
-
-
-
-    for i in range(len(all_combinations_list)):
-        print(all_combinations_list[i])
+    possible_double_list.sort(reverse=True)
     
-    for x in range(len(possible_double_list)):
-        print(possible_double_list[x])
+    print(f"Possible doubles for this score: {possible_double_list}")
+    
+    all_numbers = numbers + doubled_numbers + tripled_numbers
+    all_numbers.sort(reverse=True)
+    includes_double = False
+    darts_used = 0
+    number_list = []
+    
+    while score > 0:
+        for double in possible_double_list:
+            if includes_double == True:
+                break
+            if (score - double) >= 0:
+                score -= double
+                number_list.append(double) #List for current set of darts
+                darts_used += 1
+                includes_double = True
+                break
+        for number in all_numbers:
+            if (score - number) >= 0:
+                score -= number
+                number_list.append(number)
+                darts_used += 1
+                break
+        if darts_used > darts:
+            break
 
+    all_combinations_list.append(number_list)
+
+    #for i in range(len(all_combinations_list)):
+        #print(all_combinations_list[i])
+    
+    #for x in range(len(possible_double_list)):
+        #print(possible_double_list[x])
+    if darts_used > darts:
+        print("Unable to find solution.")
+        return
+    print(f"Done in {darts_used} darts. List: {all_combinations_list}")
+    input("Press any key to continue.")
     return
 
 
