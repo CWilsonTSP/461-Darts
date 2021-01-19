@@ -31,7 +31,7 @@ all_numbers = []
 [all_numbers.append(x) for x in nums if x not in all_numbers]
 all_numbers.sort(reverse=True)
 doubled_numbers.sort(reverse=True)
-all_combinations_list = []
+#all_combinations_list = []
 
 def recursion_hell(score, darts, includes_double, scorelist, last_num):
     if (darts <= 0) or (score <= 0): #If you're out of score or darts, return.
@@ -39,8 +39,8 @@ def recursion_hell(score, darts, includes_double, scorelist, last_num):
     if darts == 1: #If it's possible to make the last shot, return.
         if score in all_numbers and score <= last_num:
             scorelist.append(score)
-            all_combinations_list.append(scorelist.copy())
-            print(f"Adding {scorelist.copy()} to list.")
+            #all_combinations_list.append(scorelist.copy())
+            print(f"Found: {scorelist.copy()}")
             scorelist.pop()
         return
             
@@ -49,8 +49,8 @@ def recursion_hell(score, darts, includes_double, scorelist, last_num):
             if num > score: pass
             elif num == score:
                 scorelist.append(num)
-                all_combinations_list.append(scorelist.copy())
-                print(f"Adding {scorelist.copy()} to list.")
+                #all_combinations_list.append(scorelist.copy())
+                print(f"Found: {scorelist.copy()}")
                 scorelist.pop()
                 #return			#This fully stops the recursion early
             else:
@@ -65,8 +65,8 @@ def recursion_hell(score, darts, includes_double, scorelist, last_num):
             if num > score or num*darts < score: pass
             elif num == score:
                 scorelist.append(score)
-                all_combinations_list.append(scorelist.copy())
-                print(f"Adding {scorelist.copy()} to list.")
+                #all_combinations_list.append(scorelist.copy())
+                print(f"Found: {scorelist.copy()}")
                 last_num = 60
                 scorelist.pop()
                 #return
@@ -134,7 +134,7 @@ def main():
     #for x in range(len(possible_double_list)):
         #print(possible_double_list[x])
 
-    print(f"List: {all_combinations_list}")
+    #print(f"List: {all_combinations_list}")
     end = time.time()
     input(f"Press any key to continue. Elapsed time: {(end-start)/60} minutes. ({end-start} seconds)")
     return
