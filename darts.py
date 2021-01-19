@@ -62,7 +62,7 @@ def recursion_hell(score, darts, includes_double, scorelist, last_num):
     for num in all_numbers:
         if num <= last_num: #Checks only the singular combination of descending order
             #print(f"{num} <= {last_num}")
-            if num > score: pass
+            if num > score or num*darts < score: pass
             elif num == score:
                 scorelist.append(score)
                 all_combinations_list.append(scorelist.copy())
